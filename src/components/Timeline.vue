@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import dayjs from "dayjs";
-import { Post, today, thisMonth, thisWeek } from "@/models/post";
+import { TimelinePost, today, thisMonth, thisWeek } from "@/models/post";
+import TimelineItem from "./TimelineItem.vue";
 
 const periods = ["Today", "This Week", "This Month"];
 const selectedPeriod = ref(periods[0]);
-const posts = computed(() => {
+const posts = computed<TimelinePost[]>(() => {
   return [today, thisWeek, thisMonth]
     .map(post => {
       return {
@@ -33,7 +34,7 @@ const changePeriod = (period: string) => {
 
 <template>
   <nav class="mt-5 px-4 py-4 shadow rounded">
-    <span class="flex justify-center gap-6">
+    <span class="flex justify-center gap-6 mb-4">
       <a
         v-for="period in periods"
         :key="period"
@@ -44,9 +45,11 @@ const changePeriod = (period: string) => {
       >
     </span>
 
-    <div v-for="post in posts" :key="post.id">
-      {{ post.created.format("YYYY/MM/DD") }}
-    </div>
+    <TimelineItem
+      v-for="post in posts"
+      :key="post.id"
+      :post="post"
+    ></TimelineItem>
   </nav>
 </template>
 
