@@ -6,26 +6,26 @@ import TimelineItem from "./TimelineItem.vue";
 
 const periods = ["Today", "This Week", "This Month"];
 const selectedPeriod = ref(periods[0]);
-const posts = computed<TimelinePost[]>(() => {
-  return [today, thisWeek, thisMonth]
-    .map(post => {
-      return {
-        ...post,
-        created: dayjs(post.created)
-      };
-    })
+const posts = computed<TimelinePost[]>(() =>
+  [today, thisWeek, thisMonth]
+    .map(post => ({
+      ...post,
+      created: dayjs(post.created)
+    }))
     .filter(post => {
       if (selectedPeriod.value === "Today") {
         return post.created.isSame(dayjs(), "day");
-      } else if (selectedPeriod.value === "This Week") {
+      }
+      if (selectedPeriod.value === "This Week") {
         return post.created.isSame(dayjs(), "week");
-      } else if (selectedPeriod.value === "This Month") {
+      }
+      if (selectedPeriod.value === "This Month") {
         return post.created.isSame(dayjs(), "month");
       }
 
       return post;
-    });
-});
+    })
+);
 
 const changePeriod = (period: string) => {
   selectedPeriod.value = period;
