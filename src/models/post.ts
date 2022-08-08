@@ -1,4 +1,4 @@
-import dayjs from "@/models/dayjs";
+import dayjs from "../models/dayjs";
 
 export interface IPost {
   id: string,
