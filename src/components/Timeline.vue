@@ -1,35 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import dayjs from "dayjs";
-import { TimelinePost, today, thisMonth, thisWeek } from "@/models/post";
+import { usePosts } from "@/stores/posts";
+import { periods } from "@/models/constants";
 import TimelineItem from "./TimelineItem.vue";
 
-const periods = ["Today", "This Week", "This Month"];
-const selectedPeriod = ref(periods[0]);
-const posts = computed<TimelinePost[]>(() =>
-  [today, thisWeek, thisMonth]
-    .map(post => ({
-      ...post,
-      created: dayjs(post.created)
-    }))
-    .filter(post => {
-      if (selectedPeriod.value === "Today") {
-        return post.created.isSame(dayjs(), "day");
-      }
-      if (selectedPeriod.value === "This Week") {
-        return post.created.isSame(dayjs(), "week");
-      }
-      if (selectedPeriod.value === "This Month") {
-        return post.created.isSame(dayjs(), "month");
-      }
-
-      return post;
-    })
-);
-
-const changePeriod = (period: string) => {
-  selectedPeriod.value = period;
-};
+const postStore = usePosts();
 </script>
 
 <template>
@@ -39,14 +13,14 @@ const changePeriod = (period: string) => {
         v-for="period in periods"
         :key="period"
         class="p-1 cursor-pointer"
-        :class="{ active: selectedPeriod === period }"
-        @click="changePeriod(period)"
+        :class="{ active: postStore.selectedPeriod === period }"
+        @click="postStore.setSelectedPeriod(period)"
         >{{ period }}</a
       >
     </span>
 
     <TimelineItem
-      v-for="post in posts"
+      v-for="post in postStore.filteredPosts"
       :key="post.id"
       :post="post"
     ></TimelineItem>

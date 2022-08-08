@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 
 import dayjs from 'dayjs'
@@ -9,4 +10,8 @@ import 'virtual:windi-devtools'
 import 'virtual:windi.css'
 import './style.css'
 
-createApp(App).mount('#app')
+const pinia = createPinia()
+const app = createApp(App);
+
+app.use(pinia);
+app.mount("#app")
