@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { usePosts } from "@/stores/posts";
-import { periods } from "@/models/constants";
-import TimelineItem from "./TimelineItem.vue";
+import { usePosts } from '@/stores/posts'
+import { periods } from '@/models/constants'
+import TimelineItem from './TimelineItem.vue'
 
-const postStore = usePosts();
+const postStore = usePosts()
 </script>
 
 <template>
@@ -15,8 +15,7 @@ const postStore = usePosts();
         class="p-1 cursor-pointer"
         :class="{ active: postStore.selectedPeriod === period }"
         @click="postStore.setSelectedPeriod(period)"
-        >{{ period }}</a
-      >
+      >{{ period }}</a>
     </span>
 
     <TimelineItem

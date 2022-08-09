@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { TimelinePost } from "@/models/post";
+import { TimelinePost } from '@/models/post'
 
 const props = defineProps<{
   post: TimelinePost;
-}>();
+}>()
 </script>
 
 <template>
