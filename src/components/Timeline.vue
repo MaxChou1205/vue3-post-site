@@ -4,6 +4,7 @@ import { periods } from '@/models/constants'
 import TimelineItem from './TimelineItem.vue'
 
 const postStore = usePosts()
+await postStore.fetchPosts()
 </script>
 
 <template>

@@ -4,7 +4,15 @@ import Timeline from '@/components/Timeline.vue'
 
 <template>
   <div class="max-w-[1280px] m-auto">
-    <Timeline></Timeline>
+    <Suspense>
+      <Timeline></Timeline>
+
+      <template #fallback>
+        <div class="mt-[20%] flex justify-center items-center">
+          Loading...
+        </div>
+      </template>
+    </Suspense>
   </div>
 </template>
 

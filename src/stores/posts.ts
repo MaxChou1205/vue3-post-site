@@ -1,30 +1,34 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
 import {
-  IPost, today, thisWeek, thisMonth, TimelinePost
+  IPost, TimelinePost 
 } from '@/models/post'
 import { Period } from '@/models/constants'
 
+const delay = () => {
+  return new Promise<void>((res) => setTimeout(res, 1500))
+}
+
 export const usePosts = defineStore('posts', {
   state: (): IState => ({
-    ids: [ today.id, thisWeek.id, thisMonth.id ],
-    content: new Map([ [ today.id, today ], [ thisWeek.id, thisWeek ], [ thisMonth.id, thisMonth ] ]),
+    ids: [],
+    content: new Map(),
     selectedPeriod: 'Today',
   }),
   getters: {
     filteredPosts: (state: IState): TimelinePost[] => {
       return state.ids
-        .map(id => {
+        .map((id) => {
           const post = state.content.get(id)
 
           if (!post) throw Error(`post ${ id } not found`)
 
           return {
             ...post,
-            created: dayjs(post.created)
+            created: dayjs(post.created),
           }
         })
-        .filter(post => {
+        .filter((post) => {
           if (state.selectedPeriod === 'Today') {
             return post.created.isSame(dayjs(), 'day')
           }
@@ -37,18 +41,33 @@ export const usePosts = defineStore('posts', {
 
           return post
         })
-    }
+    },
   },
   actions: {
     setSelectedPeriod (periods: Period) {
       this.selectedPeriod = periods
-    }
-  }
+    },
+    async fetchPosts () {
+      const res = await fetch('http://localhost:8000/posts')
+      const posts = (await res.json()) as IPost[]
+      await delay()
+
+      let ids: string[] = []
+      let content: Map<string, IPost> = new Map()
+      for (const post of posts) {
+        ids.push(post.id)
+        content.set(post.id, post)
+      }
+
+      this.ids = ids
+      this.content = content
+    },
+  },
 })
 
 interface IState {
-  ids: string[],
+  ids: string[]
   // content: Record<string, Post>
-  content: Map<string, IPost>,
+  content: Map<string, IPost>
   selectedPeriod: Period
 }
