@@ -14,7 +14,8 @@
     "express": "4.17",
     "express-session": "^1.17.3",
     "ts-node": "^10.7.0",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@104corp/eslint-config-104z": "git+https://github.com/104corp/104z-eslint-config.git#v2.0.0",

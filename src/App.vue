@@ -1,19 +1,12 @@
-<script setup lang="ts">
-import Timeline from '@/components/Timeline.vue'
-</script>
-
 <template>
-  <div class="max-w-[1280px] m-auto">
-    <Suspense>
-      <Timeline></Timeline>
-
-      <template #fallback>
-        <div class="mt-[20%] flex justify-center items-center">
-          Loading...
-        </div>
-      </template>
-    </Suspense>
+  <div class="max-w-[1280px] m-auto py-10">
+    <Navbar></Navbar>
+    <RouterView></RouterView>
   </div>
 </template>
+
+<script setup lang="ts">
+import Navbar from '@/components/Navbar.vue'
+</script>
 
 <style scoped></style>
