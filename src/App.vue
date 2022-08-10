@@ -9,4 +9,6 @@
 import Navbar from '@/components/Navbar.vue'
 </script>
 
-<style scoped></style>
+<style>
+@import "highlight.js/styles/atom-one-dark.css";
+</style>
