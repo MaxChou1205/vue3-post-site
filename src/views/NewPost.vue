@@ -8,6 +8,7 @@ const post: TimelinePost = {
   title: '',
   created: dayjs(),
   markdown: '## Title',
+  html: '',
 }
 </script>
 
