@@ -105,4 +105,8 @@ a:hover {
   textarea {
     @apply px-4 py-2 border rounded;
   }
+
+  .pos-center {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  }
 }

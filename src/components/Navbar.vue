@@ -11,4 +11,8 @@
       </router-link>
     </button>
   </div>
+
+  <Teleport to="#modal">
+    test 123
+  </Teleport>
 </template>
