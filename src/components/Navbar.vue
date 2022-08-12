@@ -1,7 +1,19 @@
+<script setup lang="ts">
+import { useModal } from '@/composables/modal'
+
+const modal = useModal()
+</script>
+
 <template>
-  <div class="flex items-center">
+  <div class="flex justify-end items-center">
     <button
-      class="ml-auto p-2 border border-dark-400 rounded cursor-pointer transform duration-300 hover:scale-105 active:translate-y-1"
+      class="mr-2"
+      @click="modal.toggle"
+    >
+      Sign up
+    </button>
+    <button
+      class=" p-2 border border-dark-400 rounded cursor-pointer transform duration-300 hover:scale-105 active:translate-y-1"
     >
       <router-link
         to="/post/new"
