@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useModal } from '@/composables/modal'
-import FormInput from '@/components/FormInput.vue'
+import SignupForm from '@/components/SignupForm.vue'
 
 const modal = useModal()
-
-const username = ref('')
 </script>
 
 <template>
-  <FormInput
-    v-model="username"
-    name="username"
-  ></FormInput>
   <div class="flex justify-end items-center">
     <button
       class="mr-2"
@@ -33,6 +26,6 @@ const username = ref('')
   </div>
 
   <Teleport to="#modal">
-    test 123
+    <SignupForm></SignupForm>
   </Teleport>
 </template>

@@ -17,3 +17,6 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 run server
 ` npx ts-node src/server/index.ts`
+
+test ts file
+`npx ts-node-esm src/<filepath>.ts`

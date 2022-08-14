@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import { IStatus } from '@/models/validation'
+
 defineProps<{
   name: string
   modelValue: string
+  status: IStatus
 }>()
 
-const emit = defineEmits<
-  {(event: 'update:modelValue', value: string): void }
->()
+const emit = defineEmits<{(event: 'update:modelValue', value: string): void}>()
 
 function handleInput (e: Event) {
   const value = (e.target as HTMLInputElement).value
@@ -24,6 +25,12 @@ function handleInput (e: Event) {
         :value="modelValue"
         @input="handleInput"
       >
+    </div>
+    <div
+      v-if="!status.valid"
+      class="form_error"
+    >
+      {{ status.message }}
     </div>
   </div>
 </template>

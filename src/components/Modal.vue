@@ -6,7 +6,7 @@ const modal = useModal()
 
 <template>
   <div
-    v-if="modal.isOpen.value"
+    v-show="modal.isOpen.value"
     class="fixed inset-0 overflow-y-auto"
   >
     <div
