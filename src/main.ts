@@ -9,7 +9,7 @@ dayjs.extend(isoWeek)
 
 import 'virtual:windi-devtools'
 import 'virtual:windi.css'
-import './style.css'
+import './style.scss'
 
 const pinia = createPinia()
 const app = createApp(App)

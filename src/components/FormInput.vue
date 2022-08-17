@@ -18,9 +18,10 @@ function handleInput (e: Event) {
 <template>
   <div>
     <label :for="name">{{ name }}</label>
-    <div>
+    <div class="mt-2">
       <input
         :id="name"
+        class="w-full"
         type="text"
         :value="modelValue"
         @input="handleInput"
