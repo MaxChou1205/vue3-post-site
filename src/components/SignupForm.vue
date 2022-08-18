@@ -36,12 +36,12 @@ const passwordStatus = computed(() =>
 )
 
 const inValid = computed(() => {
-  return (!usernameStatus.value.valid || !passwordStatus.value.valid)
+  return !usernameStatus.value.valid || !passwordStatus.value.valid
 })
 
 const handleSubmit = async () => {
   if (inValid.value) return
-  
+
   const newUser: NewUser = {
     username: username.value,
     password: password.value,
