@@ -48,7 +48,7 @@ export const usePosts = defineStore('posts', {
       this.selectedPeriod = periods
     },
     async fetchPosts () {
-      const res = await fetch('http://localhost:8000/posts')
+      const res = await fetch('/api/posts')
       const posts = (await res.json()) as IPost[]
       await delay()
 
@@ -67,7 +67,7 @@ export const usePosts = defineStore('posts', {
         ...post,
         created: post.created.toISOString(),
       })
-      return await fetch('http://localhost:8000/posts', {
+      return await fetch('/api/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body,

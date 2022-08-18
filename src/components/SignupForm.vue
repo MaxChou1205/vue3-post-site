@@ -29,7 +29,7 @@ const passwordStatus = computed(() =>
   validate(password.value, [
     required,
     length({
-      min: 10,
+      min: 6,
       max: 40,
     }),
   ])
