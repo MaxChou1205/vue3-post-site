@@ -63,11 +63,13 @@ const handleSubmit = async () => {
       v-model="username"
       name="username"
       :status="usernameStatus"
+      type="text"
     ></FormInput>
     <FormInput
       v-model="password"
       name="password"
       :status="passwordStatus"
+      type="password"
     ></FormInput>
     <button
       class="mt-4"

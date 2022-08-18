@@ -4,7 +4,8 @@ import { IStatus } from '@/models/validation'
 defineProps<{
   name: string
   modelValue: string
-  status: IStatus
+  status: IStatus,
+  type: string
 }>()
 
 const emit = defineEmits<{(event: 'update:modelValue', value: string): void}>()
@@ -22,7 +23,7 @@ function handleInput (e: Event) {
       <input
         :id="name"
         class="w-full"
-        type="text"
+        :type="type"
         :value="modelValue"
         @input="handleInput"
       >
