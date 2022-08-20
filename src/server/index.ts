@@ -82,6 +82,20 @@ app.post('/user/logout', (req, res) => {
   return
 })
 
+app.post('/user/login', (req, res) => {
+  const user = allUsers.find((u) => u.username === req.body.username)
+  if (!user || user.password !== req.body.password) {
+    res.status(401).send('Unauthorized').end()
+    return
+  } else {
+    authenticate(user.id, req, res)
+    const {
+      password, ...userWithoutPassword 
+    } = user
+    res.json(userWithoutPassword)
+  }
+})
+
 app.listen(8000, () => {
   console.log('listening on port 8000')
 })

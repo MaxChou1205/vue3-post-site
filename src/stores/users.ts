@@ -31,6 +31,20 @@ export const useUsers = defineStore('users', {
       })
       this.authenticate()
     },
+    async login (newUser: NewUser) {
+      const body = JSON.stringify(newUser)
+
+      const res = await fetch('/api/user/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+      })
+      if ([ 401, 403, 404 ].includes(res.status)) {
+        throw new Error('Invalid credentials')
+      }
+
+      this.currentUserId = (await res.json()).id
+    },
     async createUser (newUser: NewUser) {
       const body = JSON.stringify(newUser)
 

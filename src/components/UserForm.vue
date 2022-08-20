@@ -8,6 +8,11 @@ import {
 } from '@/models/validation'
 import { NewUser } from '@/models/user'
 
+defineProps<{
+  type: string
+  error?: string
+}>()
+
 const emit = defineEmits<{(event: 'submit', value: NewUser): void }>()
 
 const username = ref('')
@@ -52,21 +57,27 @@ const handleSubmit = async () => {
   <form @submit.prevent="handleSubmit">
     <FormInput
       v-model="username"
-      name="username"
+      name="Username"
       :status="usernameStatus"
       type="text"
     ></FormInput>
     <FormInput
       v-model="password"
-      name="password"
+      name="Password"
       :status="passwordStatus"
       type="password"
     ></FormInput>
+    <div
+      v-if="error"
+      class="mt-2 text-red-500 text-xs italic"
+    >
+      {{ error }}
+    </div>
     <button
-      class="mt-4"
+      class="mt-4 uppercase"
       :disabled="inValid"
     >
-      Sign up
+      {{ type }}
     </button>
   </form>
 </template>

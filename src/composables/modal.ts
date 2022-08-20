@@ -2,6 +2,7 @@ import {
   ref, shallowRef 
 } from 'vue'
 import SignupForm from '@/components/SignupForm.vue'
+import SigninForm from '@/components/SigninForm.vue'
 
 const isOpen = ref(false)
 const component = shallowRef()
@@ -12,7 +13,7 @@ export const useModal = () => {
     if (type === 'signup') {
       component.value = SignupForm
     } else if (type === 'signin') {
-      component.value = SignupForm
+      component.value = SigninForm
     }
   }
 
