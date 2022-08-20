@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useModal } from '@/composables/modal'
 import { useUsers } from '@/stores/users'
-import SignupForm from '@/components/SignupForm.vue'
+// import SignupForm from '@/components/SignupForm.vue'
 
 const modal = useModal()
 const userStore = useUsers()
+
+userStore.authenticate()
 </script>
 
 <template>
@@ -36,23 +38,19 @@ const userStore = useUsers()
   >
     <button
       class="mr-2"
-      @click="modal.toggle"
+      @click="modal.toggle('signup')"
     >
       Sign up
     </button>
     <button
       class="p-2 border border-dark-400 rounded cursor-pointer transform duration-300 hover:scale-105 active:translate-y-1"
+      @click="modal.toggle('signin')"
     >
-      <router-link
-        to="/post/new"
-        class="text-dark-900 active:text-dark-400 hover:text-gray-500"
-      >
-        Sign in
-      </router-link>
+      Sign in
     </button>
   </div>
 
   <Teleport to="#modal">
-    <SignupForm></SignupForm>
+    <component :is="modal.component.value"></component>
   </Teleport>
 </template>

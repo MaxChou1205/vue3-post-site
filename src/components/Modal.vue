@@ -23,7 +23,7 @@ const modal = useModal()
         <div class="pr-2 flex justify-end items-center z-50">
           <span
             class="cursor-pointer"
-            @click="modal.toggle"
+            @click="modal.hide"
           >&times;</span>
         </div>
 
