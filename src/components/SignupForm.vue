@@ -55,6 +55,8 @@ const handleSubmit = async () => {
     modal.toggle()
   }
 }
+
+userStore.authenticate()
 </script>
 
 <template>

@@ -57,7 +57,7 @@ app.post<{}, {}, IUser>('/users', (req, res) => {
 app.get('/user', (req, res) => {
   const token = req.cookies[COOKIE]
   if (!token) {
-    res.status(401).send('Unauthorized')
+    res.status(401).send('Unauthorized').end()
     return
   }
 
@@ -65,15 +65,21 @@ app.get('/user', (req, res) => {
   try {
     result = jsonwebtoken.verify(token, SECRET) as { id: string }
   } catch (err) {
-    res.status(404)
+    res.status(404).end()
     return
   }
   const user = allUsers.find((u) => u.id === result.id)
   if (!user) {
-    res.status(404).send('not found')
+    res.status(404).send('not found').end()
     return
   }
   res.json(user)
+})
+
+app.post('/user/logout', (req, res) => {
+  res.cookie(COOKIE, '', { httpOnly: true })
+  res.status(200).end()
+  return
 })
 
 app.listen(8000, () => {
