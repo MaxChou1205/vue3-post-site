@@ -12,7 +12,7 @@ const error = ref('')
 const handleLogin = async (newUser: NewUser) => {
   try {
     await userStore.login(newUser)
-    userStore.authenticate()
+    await userStore.authenticate()
     modal.hide()
   } catch (e) {
     error.value = 'Invalid credentials'

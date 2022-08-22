@@ -44,7 +44,7 @@ userStore.authenticate()
     </button>
     <button
       class="p-2 border border-dark-400 rounded cursor-pointer transform duration-300 hover:scale-105 active:translate-y-1"
-      @click="modal.toggle('signin')"
+      @click="modal.toggle('login')"
     >
       Sign in
     </button>
