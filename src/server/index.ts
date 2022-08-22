@@ -83,6 +83,7 @@ app.post('/user/logout', (req, res) => {
 })
 
 app.post('/user/login', (req, res) => {
+  console.log(allUsers)
   const user = allUsers.find((u) => u.username === req.body.username)
   if (!user || user.password !== req.body.password) {
     res.status(401).send('Unauthorized').end()
