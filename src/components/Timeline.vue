@@ -22,6 +22,7 @@ await postStore.fetchPosts()
     <TimelineItem
       v-for="post in postStore.filteredPosts"
       :key="post.id"
+      class="border-b-1"
       :post="post"
     ></TimelineItem>
   </nav>

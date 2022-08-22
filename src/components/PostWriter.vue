@@ -1,22 +1,20 @@
-<!-- eslint-disable vue/no-v-html -->
-<!-- eslint-disable vue/no-v-html -->
 <script setup lang="ts">
 import {
   ref, watch 
 } from 'vue'
-import { useRouter } from 'vue-router'
 import { marked } from 'marked'
 import highlightjs from 'highlight.js'
 import debounce from 'lodash/debounce'
-import { usePosts } from '@/stores/posts'
-import { TimelinePost } from '@/models/post'
+import { useUsers } from '@/stores/users'
+import { IPost } from '@/models/post'
+import { Dayjs } from 'dayjs'
 
 const props = defineProps<{
-  post: TimelinePost
+  post: IPost
+  action(post: IPost): void
 }>()
 
-const router = useRouter()
-const postStore = usePosts()
+const userStore = useUsers()
 
 const title = ref(props.post.title)
 const content = ref(props.post.markdown)
@@ -50,14 +48,22 @@ const parseHtml = (markdown: string) => {
 }
 
 const handleSave = async () => {
-  const params: TimelinePost = {
+  if (!userStore.currentUserId) {
+    throw new Error('user is not authenticated')
+  }
+
+  const params: IPost = {
     ...props.post,
+    created:
+      typeof props.post.created === 'string'
+        ? props.post.created
+        : (props.post.created as Dayjs).toISOString(),
     title: title.value,
     markdown: content.value,
     html: html.value,
+    authorId: userStore.currentUserId,
   }
-  await postStore.createPost(params)
-  router.push('/')
+  props.action(params)
 }
 
 watch(

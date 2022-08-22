@@ -62,13 +62,22 @@ export const usePosts = defineStore('posts', {
       this.ids = ids
       this.content = content
     },
-    async createPost (post: TimelinePost) {
+    async createPost (post: IPost) {
       const body = JSON.stringify({
         ...post,
-        created: post.created.toISOString(),
       })
       return await fetch('/api/posts', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+      })
+    },
+    async updatePost (post: IPost) {
+      const body = JSON.stringify({
+        ...post,
+      })
+      return await fetch('/api/posts', {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body,
       })
