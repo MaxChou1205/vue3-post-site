@@ -30,6 +30,11 @@ export const router = createRouter({
     {
       path: '/post/:id/edit',
       component: EditPost,
+      beforeEnter: async () => {
+        const userStore = useUsers()
+        await userStore.authenticate()
+        if (!userStore.currentUserId) return { path: '/' }
+      },
     },
   ],
 })

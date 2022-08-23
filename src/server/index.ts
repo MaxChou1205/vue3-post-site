@@ -9,6 +9,8 @@ import {
   today, thisWeek, thisMonth, IPost 
 } from '../models/post'
 import { IUser } from '../models/user'
+import { types } from 'sass'
+import Error = types.Error
 
 const app = express()
 app.use(cors())
@@ -30,6 +32,18 @@ app.post<{}, {}, IPost>('/posts', (req, res) => {
   allPosts.push(post)
 
   res.json(post)
+})
+
+app.patch<{}, {}, IPost>('/posts', (req, res) => {
+  const index = allPosts.findIndex(p => p.id === req.body.id)
+  if (index === -1)
+    throw new Error(`post ${ req.body.id } was not found.`)
+  
+  const post = allPosts[index]
+  allPosts[index] = {
+    ...post, ...req.body 
+  }
+  res.json(allPosts[index])
 })
 
 const SECRET = 'secret123'
